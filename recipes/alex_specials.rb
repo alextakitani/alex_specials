@@ -1,5 +1,7 @@
 prefs[:hstore] = yes_wizard?("use hstore?") if prefs[:database] == 'postgresql'
 
+prefs[:locale] = multiple_choice "Default Locale?", [["En (default)", "en"],  ["pt-BR", "pt-BR"]] unless prefs.has_key? :locale
+
 say_wizard "recipe setting capistrano for deployment"
 gem 'capistrano', '>= 2.14.2', :group => :development
 gem 'rvm-capistrano', '>= 1.2.7', :group => :development
@@ -45,6 +47,11 @@ after_bundler do
 
   say_wizard "use utf-8 for database" 
   gsub_file "config/database.yml", "unicode","utf8"
+  
+  unless prefs[:locale].nil?
+    say_wizard "setting-up locales"
+    copy_from "https://raw.github.com/alextakitani/alex_specials/master/locales/devise.#{prefs[:locale]}.yml", 'config/locales/devise.#{prefs[:locale]}.yml'
+  end
 
 end
 
