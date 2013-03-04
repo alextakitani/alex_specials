@@ -54,18 +54,3 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 end
-
-OmniAuth.config.test_mode = true
-OmniAuth.config.add_mock(:twitter, {
-  :uid => '12345',
-  :nickname => 'zapnap'
-})
-
-OmniAuth.config.add_mock(:facebook, {
-  :provider => "facebook",
-  :uid      => "1234",
-  :info     => {
-                 :name        => "John Doe",
-                 :email       => "johndoe@email.com"},
-                 :credentials => {:token => "testtoken234tsdf"}
-               })
