@@ -1,0 +1,47 @@
+recipes:
+- setup
+- readme
+- gems
+- testing
+- email
+- models
+- controllers
+- views
+- routes
+- frontend
+- extras
+- git
+- init
+- prelaunch
+- readme
+- saas  
+- alex_specials
+
+prefs:
+  :dev_webserver: thin
+  :prod_webserver: same
+  :database: sqlite
+  :templates: erb
+  :unit_test: rspec
+  :integration: rspec-capybara
+  :fixtures: factory_girl
+  :frontend: bootstrap
+  :bootstrap: sass
+  :form_builder: simple_form
+  :email: gmail
+  :authentication: devise
+  :devise_modules: default
+  :authorization: cancan
+  :starter_app: admin_app
+  :railsapps: none
+  :quiet_assets: true
+  :local_env_file: true
+  :better_errors: true
+  :ban_spiders: true
+  :jsruntime: false
+  :github: false
+  :rvmrc: false
+
+args:
+  :skip_test_unit: yes 
+  :skip_active_record: false
