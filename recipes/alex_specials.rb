@@ -1,3 +1,5 @@
+prefs[:hstore] = yes_wizard?("use hstore?") if prefs[:database] == 'postgresql'
+
 say_wizard "recipe setting capistrano for deployment"
 gem 'capistrano', '>= 2.14.2', :group => :development
 gem 'rvm-capistrano', '>= 1.2.7', :group => :development
@@ -6,6 +8,8 @@ say_wizard "recipe setting turbo-sprockets-rails3 for faster deployment"
 gem 'turbo-sprockets-rails3' , '>= 0.3.6', :group => :assets
 
 say_wizard "recipe setting development prefs"
+
+gem 'activerecord-postgres-hstore' if prefs[:hstore]
 
 gem_group :development do
   gem 'pry'
@@ -36,6 +40,12 @@ after_bundler do
 	copy_from 'https://raw.github.com/alextakitani/alex_specials/master/spec_helper.rb', 'spec/spec_helper.rb'
 	append_to_file '.rspec', '--format documentation'
 	copy_from 'https://raw.github.com/alextakitani/alex_specials/master/Guardfile', 'Guardfile'
+
+  generate 'hstore:setup' if prefs[:hstore] 
+
+  say_wizard "use utf-8 for database" 
+  gsub_file "config/database.yml", "unicode","utf8"
+
 end
 
 __END__

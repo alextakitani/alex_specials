@@ -20,7 +20,7 @@ recipes:
 prefs:
   :dev_webserver: thin
   :prod_webserver: same
-  :database: sqlite
+  :database: postgresql
   :templates: erb
   :unit_test: rspec
   :integration: rspec-capybara
