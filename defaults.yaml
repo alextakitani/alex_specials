@@ -20,7 +20,7 @@ recipes:
 prefs:
   :dev_webserver: thin
   :prod_webserver: same
-  :database: postgresql
+  :database: sqlite
   :templates: erb
   :unit_test: rspec
   :integration: rspec-capybara
@@ -41,6 +41,8 @@ prefs:
   :jsruntime: false
   :github: false
   :rvmrc: false
+  :locale: pt-BR
+  :time_zone: Brasilia
 
 args:
   :skip_test_unit: yes 

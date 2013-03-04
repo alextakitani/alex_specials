@@ -48,9 +48,14 @@ after_bundler do
   say_wizard "use utf-8 for database" 
   gsub_file "config/database.yml", "unicode","utf8"
   
-  unless prefs[:locale].nil?
+  if prefs[:locale]
     say_wizard "setting-up locales"
-    copy_from "https://raw.github.com/alextakitani/alex_specials/master/locales/devise.#{prefs[:locale]}.yml", 'config/locales/devise.#{prefs[:locale]}.yml'
+    copy_from "https://raw.github.com/alextakitani/alex_specials/master/locales/#{prefs[:locale]}.yml", "config/locales/#{prefs[:locale]}.yml"
+    copy_from "https://raw.github.com/alextakitani/alex_specials/master/locales/devise.#{prefs[:locale]}.yml", "config/locales/devise.#{prefs[:locale]}.yml"
+    copy_from "https://raw.github.com/alextakitani/alex_specials/master/locales/simple_form.#{prefs[:locale]}.yml", "config/locales/simple_form.#{prefs[:locale]}.yml"
+
+    insert_into_file "config/application.rb", "\n\t\tconfig.time_zone = '#{prefs[:time_zone]}'" ,:after => "# config.i18n.default_locale = :de" if prefs[:time_zone]
+    gsub_file "config/application.rb", "# config.i18n.default_locale = :de" , "config.i18n.default_locale = '#{prefs[:locale]}'"   
   end
 
 end
