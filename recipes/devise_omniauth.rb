@@ -26,6 +26,7 @@ after_bundler do
 	insert_into_file 'config/routes.rb', " ,controllers: {omniauth_callbacks: 'omniauth_callbacks'} " , :after=>"devise_for :users"
 	
 	say_wizard "setting-up views"
+	remove_file 'app/views/devise/registrations/new.html.erb'
 	copy_from 'https://raw.github.com/alextakitani/alex_specials/master/devise_omniauth/views/registrations/new.html.erb', 'app/views/devise/registrations/new.html.erb'
 
 	say_wizard "setting-up controllers"
