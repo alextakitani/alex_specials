@@ -25,6 +25,9 @@ after_bundler do
 	say_wizard "modifying routes"
 	insert_into_file 'config/routes.rb', " ,controllers: {omniauth_callbacks: 'omniauth_callbacks'} " , :after=>"devise_for :users"
 	
+	say_wizard "setting-up views"
+	copy_from 'https://raw.github.com/alextakitani/alex_specials/master/devise_omniauth/views/registrations/new.html.erb', 'app/views/devise/registrations/new.html.erb'
+
 	say_wizard "setting-up controllers"
 	copy_from 'https://raw.github.com/alextakitani/alex_specials/master/devise_omniauth/omniauth_callbacks_controller.rb', 'app/controllers/omniauth_callbacks_controller.rb'
 	controller_text = <<TEXT
@@ -83,9 +86,7 @@ TEXT
 
       if auth.provider == "facebook"
         user.email = auth.info.email      
-      end
-
-      user.username = auth.info.nickname
+      end      
     end
   end
   \n
