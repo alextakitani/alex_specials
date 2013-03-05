@@ -38,7 +38,7 @@ after_bundler do
 	      session["devise.user_attributes"] = user.attributes
 	      redirect_to new_user_registration_url, :notice => "Por favor, complete os seus dados."
 	    end
-  end
+  	end
 TEXT
 
 	controller_text << "\n\talias_method :twitter, :create_or_login_from_provider" if prefs[:devise_omniauth_twitter]
@@ -82,12 +82,7 @@ TEXT
       user.uid = auth.uid
 
       if auth.provider == "facebook"
-        user.email = auth.info.email
-        user.remote_avatar_url = auth.info.image
-      end
-
-      if auth.provider == "twitter"
-        user.tmp_url = auth.info.image
+        user.email = auth.info.email      
       end
 
       user.username = auth.info.nickname
