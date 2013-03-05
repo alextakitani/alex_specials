@@ -16,6 +16,7 @@ recipes:
 - readme
 - saas  
 - alex_specials
+- devise_omniauth
 
 prefs:
   :dev_webserver: thin
@@ -43,6 +44,10 @@ prefs:
   :rvmrc: false
   :locale: pt-BR
   :time_zone: Brasilia
+  :devise_omniauth_twitter: true
+  :devise_omniauth_facebook: true
+  :devise_omniauth_google: false
+  
 
 args:
   :skip_test_unit: yes 
